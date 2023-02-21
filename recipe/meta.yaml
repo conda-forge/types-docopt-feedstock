@@ -1,5 +1,5 @@
 {% set name = "types-docopt" %}
-{% set version = "0.6.11.1" %}
+{% set version = "0.6.11.2" %}
 
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/types-docopt-{{ version }}.tar.gz
-  sha256: 10a334c3cd90b1e484e8cef8f4089d04ddca8da4597d786b83ea9a53c5221c50
+  sha256: f28d8799a8428491d19ba2074be14694e241d8eaf6781b6292c4a09802b0df8e
 
 build:
   number: 0
