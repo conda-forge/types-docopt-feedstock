@@ -1,6 +1,6 @@
+{% set python_min = python_min|default("3.8") %}
 {% set name = "types-docopt" %}
 {% set version = "0.6.11.20241107" %}
-
 
 package:
   name: {{ name|lower }}
@@ -13,16 +13,19 @@ source:
 build:
   number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
+    - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   commands:
     - test -f $SP_DIR/docopt-stubs/__init__.pyi
 
