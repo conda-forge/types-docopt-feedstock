@@ -1,6 +1,6 @@
+{% set python_min = python_min|default("3.8") %}
 {% set name = "types-docopt" %}
-{% set version = "0.6.11.4" %}
-
+{% set version = "0.6.11.20241107" %}
 
 package:
   name: {{ name|lower }}
@@ -8,21 +8,24 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/types-docopt-{{ version }}.tar.gz
-  sha256: 991a64c1569310c2240ae734fd2c10627abb8a4afaf3be5ac6f4eff9a601f31a
+  sha256: 61c44d03ac4895b5be8d40ba5cc80ce52a63d3d76777ad14669e94b5e9edf7a7
 
 build:
   number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
+    - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   commands:
     - test -f $SP_DIR/docopt-stubs/__init__.pyi
 
